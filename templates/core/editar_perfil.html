@@ -1,0 +1,32 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% block title %}Editar Perfil{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/editpub.css' %}">
+
+<div class="container mt-5 mb-5">
+  <div class="card shadow rounded-4 p-5 mx-auto" style="max-width: 600px; background: #fff0f6;">
+    <h3 class="text-center mb-4 fw-bold" style="color:#e91e63;">Editar Perfil</h3>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold text-muted">Foto de perfil</label>
+        {{ form.foto_perfil }}
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold text-muted">Descripción</label>
+        {{ form.descripcion }}
+      </div>
+
+      <div class="text-center mt-4">
+        <button type="submit" class="btn text-white px-4 py-2" style="background-color: #e91e63; border-radius: 30px; font-weight: bold;">
+          Guardar cambios
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

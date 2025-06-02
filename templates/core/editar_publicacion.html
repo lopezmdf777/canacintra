@@ -1,0 +1,83 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% block title %}Editar Publicación{% endblock %}
+
+{% block content %}
+<!-- CKEditor -->
+<script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/classic/ckeditor.js"></script>
+<link rel="stylesheet" href="{% static 'css/crear_publicacion.css' %}">
+
+<div class="container mt-5 mb-5">
+  <div class="card shadow rounded-4 p-5 mx-auto" style="max-width: 800px;">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2 class="fw-bold text-danger-emphasis" style="color: #e91e63;">Editar Publicación</h2>
+      <a href="{% url 'index' %}" class="btn-close" aria-label="Cerrar"></a>
+    </div>
+
+    <form method="post" enctype="multipart/form-data" id="form-publicacion">
+      {% csrf_token %}
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Título</label>
+        <input type="text" name="titulo" class="form-control" value="{{ form.instance.titulo }}" required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Foto de Portada</label>
+        {% if form.instance.foto_portada %}
+          <div class="mb-2">
+            <img src="{{ form.instance.foto_portada.url }}" style="max-height: 150px; border-radius: 10px;">
+          </div>
+        {% endif %}
+        {{ form.foto_portada }}
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Resumen</label>
+        <textarea name="resumen" class="form-control" rows="3" required>{{ form.instance.resumen }}</textarea>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Categoría</label>
+        <select name="fk_categoria" class="form-select">
+          {% for cat in categorias %}
+            <option value="{{ cat.id_categoria }}" {% if form.instance.fk_categoria.id_categoria == cat.id_categoria %}selected{% endif %}>
+              {{ cat.nombre }}
+            </option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Contenido</label>
+        <textarea name="contenido" id="editor">{{ form.instance.contenido }}</textarea>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Galería de Imágenes</label>
+        <input type="file" name="galeria" id="galeriaInput" class="form-control" multiple>
+        <div id="previewGaleria" class="d-flex flex-wrap mt-2">
+          {% for img in galeria %}
+            <div class="me-2 mb-2 position-relative">
+              <img src="/media/{{ img.fk_archivo.ruta_archivo }}" style="height: 80px; border-radius: 10px; object-fit: cover;">
+              <input type="checkbox" name="imagenes_eliminadas" value="{{ img.id }}" class="form-check-input position-absolute top-0 start-0">
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <button type="submit" class="btn w-100 text-white mt-3" style="background-color: #e91e63; border-radius: 30px;">
+        Guardar Cambios
+      </button>
+    </form>
+  </div>
+</div>
+
+<script>
+  ClassicEditor
+    .create(document.querySelector('#editor'))
+    .catch(error => {
+      console.error(error);
+    });
+</script>
+{% endblock %}

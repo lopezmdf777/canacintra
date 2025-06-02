@@ -1,0 +1,24 @@
+{% extends 'partials/base.html' %}
+{% block title %}Acerca de{% endblock %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/acerca.css' %}">
+
+<div class="acerca-container">
+  <div class="contenido">
+    <h1>Sobre Nosotros</h1>
+    <p>Somos un grupo de estudiantes de Ingeniería en Sistemas Computacionales del Instituto Tecnológico de Villahermosa (ITVH), apasionados por el desarrollo de software y la innovación tecnológica.</p>
+    <p>Nuestro objetivo es crear soluciones web funcionales, atractivas y útiles, enfocándonos siempre en la calidad del código y la experiencia del usuario. Este proyecto refleja nuestra dedicación, trabajo en equipo y ganas de seguir aprendiendo.</p>
+    <p>Si quieres conocer más sobre nuestro trabajo, colaborar con nosotros o simplemente saludar, no dudes en contactarnos.</p>
+  </div>
+
+  <div class="mapa">
+    <h2>Ubicación</h2>
+    <iframe 
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3794.1739097105585!2d-92.94562422609453!3d17.995010083559033!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85edd83e11c16b3f%3A0x5a85cce139003001!2sInstituto%20Tecnol%C3%B3gico%20de%20Villahermosa!5e0!3m2!1ses-419!2smx!4v1717020000000!5m2!1ses-419!2smx"
+      width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+</div>
+{% endblock %}

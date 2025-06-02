@@ -1,0 +1,63 @@
+.footer-gradient {
+  background: #121212;
+  color: #f5f5f5;
+}
+
+.footer-link {
+  color: #bbbbbb;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+  color: #e91e63;
+  text-decoration: underline;
+}
+
+.sobre-mi-text {
+  color: #dddddd;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* Redes sociales */
+.social-btn {
+  background: #fff;
+  padding: 6px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.social-btn img {
+  width: 26px;
+  height: 26px;
+}
+
+.social-btn:hover {
+  background-color: #e91e63;
+  transform: scale(1.1);
+}
+
+/* Publicaciones recientes en footer */
+.recent-img {
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-right: 10px;
+  border: 2px solid #fff;
+  transition: transform 0.3s ease;
+}
+
+.recent-img:hover {
+  transform: scale(1.05);
+}
+
+.recent-link {
+  text-decoration: none;
+  color: inherit;
+}

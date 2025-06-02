@@ -1,0 +1,84 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% block title %}Crear Publicación{% endblock %}
+
+{% block content %}
+<script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/classic/ckeditor.js"></script>
+
+<div class="container mt-5 mb-5">
+  <div class="card shadow rounded-4 p-4 mx-auto" style="max-width: 800px; background-color: white;">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h2 class="mb-0" style="color: #d81b60;">Crear Publicación</h2>
+      <a href="{% url 'index' %}" class="btn-close" aria-label="Cerrar"></a>
+    </div>
+
+    <form method="post" enctype="multipart/form-data" id="form-publicacion">
+      {% csrf_token %}
+
+      <div class="mb-4">
+        <label class="form-label fw-bold">Título</label>
+        <input type="text" name="titulo" class="form-control form-control-lg rounded-3" placeholder="Escribe el título de tu publicación" required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-bold">Foto de Portada</label>
+        <input type="file" name="foto_portada" class="form-control">
+      </div>
+
+      <div class="mb-4">
+        <label class="form-label fw-bold">Resumen</label>
+        <textarea name="resumen" class="form-control rounded-3" rows="4" placeholder="Agrega un resumen claro y atractivo" required></textarea>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-bold">Categoría</label>
+        <select name="fk_categoria" class="form-select">
+          <option value="">Seleccionar...</option>
+          {% for cat in categorias %}
+            <option value="{{ cat.id_categoria }}">{{ cat.nombre }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-bold">Contenido</label>
+        <textarea name="contenido" id="contenido" rows="10"></textarea>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-bold">Galería de Imágenes</label>
+        <input type="file" name="galeria" id="galeriaInput" multiple class="form-control">
+        <div id="previewGaleria" class="d-flex flex-wrap mt-2"></div>
+      </div>
+
+      <button type="submit" class="btn btn-lg w-100" style="background-color: #d81b60; color: white;">Publicar</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  ClassicEditor
+    .create(document.querySelector('#contenido'))
+    .catch(error => {
+      console.error(error);
+    });
+
+  document.getElementById('galeriaInput').addEventListener('change', function () {
+    const preview = document.getElementById('previewGaleria');
+    preview.innerHTML = '';
+    Array.from(this.files).forEach(file => {
+      const reader = new FileReader();
+      reader.onload = e => {
+        const img = document.createElement('img');
+        img.src = e.target.result;
+        img.style.height = '80px';
+        img.style.margin = '5px';
+        img.style.borderRadius = '10px';
+        img.style.objectFit = 'cover';
+        preview.appendChild(img);
+      };
+      reader.readAsDataURL(file);
+    });
+  });
+</script>
+{% endblock %}

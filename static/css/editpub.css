@@ -1,0 +1,15 @@
+input, textarea, select {
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  padding: 10px 15px;
+  width: 100%;
+  background: #fff;
+  transition: border 0.2s ease;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: #e91e63;
+  box-shadow: 0 0 5px #f8bbd0;
+}

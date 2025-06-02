@@ -1,0 +1,63 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/footer.css' %}">
+
+<footer class="footer-gradient text-white pt-5 pb-3 mt-5">
+  <div class="container">
+    <div class="row gy-4">
+
+      <!-- SOBRE LA PÁGINA -->
+<div class="col-md-4">
+  <h6 class="fw-bold mb-3">SOBRE LA PÁGINA</h6>
+  <p class="sobre-mi-text">
+    Este sitio fue desarrollado como una plataforma de noticias y difusión de contenido para CANACINTRA. Su objetivo es proporcionar información veraz, útil y oportuna para estudiantes, emprendedores y público en general.
+  </p>
+
+  <h6 class="fw-bold mb-2 mt-4">REDES</h6>
+  <div class="d-flex gap-2">
+    <a href="https://portal.canacintra.org.mx/" target="_blank" class="social-btn">
+      <img src="{% static 'images/blog.png' %}" alt="Canacintra">
+    </a>
+  </div>
+</div>
+
+      <!-- ENLACES -->
+      <div class="col-md-4">
+        <h6 class="fw-bold mb-3">ENLACES RÁPIDOS</h6>
+        <ul class="list-unstyled">
+          <li><a href="{% url 'index' %}" class="footer-link">Inicio</a></li>
+          <li><a href="{% url 'noticias' %}" class="footer-link">Noticias</a></li>
+          <li><a href="{% url 'acerca' %}" class="footer-link">Acerca</a></li>
+          <li><a href="{% url 'perfil' %}" class="footer-link">Mi perfil</a></li>
+        </ul>
+      </div>
+
+      <!-- PUBLICACIONES RECIENTES -->
+      <div class="col-md-4">
+        <h6 class="fw-bold mb-3">RECIENTES</h6>
+        {% for pub in publicaciones_footer|slice:":2" %}
+          <a href="{% url 'ver_publicacion' pub.id_publicacion %}" class="recent-link">
+            <div class="mb-3 d-flex align-items-center">
+              {% if pub.foto_portada %}
+                <img src="{{ pub.foto_portada.url }}" class="recent-img">
+              {% else %}
+                <img src="{% static 'img/placeholder.jpg' %}" class="recent-img">
+              {% endif %}
+              <div>
+                <div class="small fw-bold text-white">{{ pub.titulo|truncatechars:45 }}</div>
+                <small class="text-white-50">{{ pub.fecha_creacion|date:"M d, Y" }}</small>
+              </div>
+            </div>
+          </a>
+        {% empty %}
+          <p class="text-white-50">Aún no hay publicaciones disponibles.</p>
+        {% endfor %}
+      </div>
+
+    </div>
+
+    <hr class="my-4" style="background: rgba(255,255,255,0.2);">
+    <div class="text-center small text-white-50">
+      &copy; 2025 Canacintra.
+    </div>
+  </div>
+</footer>

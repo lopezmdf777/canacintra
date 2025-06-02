@@ -1,0 +1,117 @@
+.container-fluid {
+  padding: 2rem 1rem;
+  background-color: #ffffff;
+}
+
+.sidebar {
+  background-color: #000000;
+  border-right: 2px solid #e8e1e3;
+  padding: 2rem 1.5rem;
+  border-radius: 20px;
+}
+
+.sidebar a {
+  display: block;
+  padding: 12px 20px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 12px;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+  background-color: #ffffff5f;
+  color: #ffffff;
+}
+
+/* Títulos de sección */
+.panel-header,
+h3,
+h4 {
+  color: #ffffff;
+  font-weight: bold;
+}
+
+/* Tarjetas */
+.card {
+  border-radius: 20px;
+  border: none;
+  overflow: hidden;
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+}
+
+.card-img-top {
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  object-fit: cover;
+  height: 200px;
+}
+
+/* Botones */
+.btn {
+  border-radius: 20px;
+}
+
+.btn-outline-primary {
+  color: #262525;
+  border-color: #353434;
+}
+
+.btn-outline-primary:hover {
+  background-color: #423a3d;
+  color: white;
+  border-color: #3e3739;
+}
+
+.btn-success,
+.btn-danger,
+.btn-secondary {
+  border-radius: 20px;
+}
+
+.btn-success {
+  background-color: #43a047;
+  border: none;
+}
+
+.btn-danger {
+  background-color: #3c2f2f;
+  border: none;
+}
+
+.btn-secondary {
+  background-color: #bdbdbd;
+  border: none;
+}
+
+/* Comentarios */
+.list-group-item {
+  background-color: #ffffff;
+  border: 1px solid #2b2829;
+  border-radius: 16px;
+  padding: 1rem;
+}
+
+/* Imágenes miniatura */
+img.rounded,
+img.rounded-circle {
+  border: 2px solid #383536;
+}
+
+/* Input roles */
+select.form-select-sm {
+  border-radius: 12px;
+}
+
+/* Botón cambiar rol */
+.input-group .btn-outline-primary {
+  border-radius: 12px;
+  font-weight: bold;
+}

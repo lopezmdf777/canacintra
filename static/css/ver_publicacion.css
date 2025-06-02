@@ -1,0 +1,130 @@
+.publicacion-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.portada-container {
+  position: relative;
+}
+
+.portada-img {
+  width: 100%;
+  border-radius: 10px;
+  max-height: 400px;
+  object-fit: cover;
+}
+
+.titulo-overlay {
+  position: absolute;
+  bottom: 15px;
+  left: 20px;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 1px 1px 4px #000;
+}
+
+.autor-box {
+  display: flex;
+  align-items: center;
+  margin: 1.5rem 0;
+  gap: 1rem;
+}
+
+.foto-autor {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #e91e63;
+}
+
+.autor-nombre {
+  font-weight: bold;
+  color: #e91e63;
+  text-decoration: none;
+}
+
+.fecha {
+  font-size: 0.85rem;
+  color: #777;
+}
+
+.categoria {
+  font-size: 0.9rem;
+  background: #fce4ec;
+  padding: 5px 15px;
+  display: inline-block;
+  border-radius: 15px;
+  margin-bottom: 1rem;
+  color: #ad1457;
+  font-weight: bold;
+}
+
+.resumen {
+  font-style: italic;
+  color: #555;
+}
+
+.contenido {
+  margin-top: 2rem;
+  line-height: 1.7;
+  color: #333;
+}
+
+.galeria {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 2rem;
+}
+
+.galeria img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.comentarios-section {
+  margin-top: 3rem;
+}
+
+.comentario {
+  background: #fce4ec;
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.fecha-com {
+  font-size: 0.75rem;
+  color: #666;
+  margin-left: 8px;
+}
+
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #e91e63;
+  border-radius: 10px;
+  resize: none;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.btn-comentar {
+  background-color: #e91e63;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn-comentar:hover {
+  background-color: #c2185b;
+}

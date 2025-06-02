@@ -1,0 +1,46 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% block title %}Mi Perfil{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/perfil.css' %}">
+
+<div class="container mt-4">
+  <!-- Encabezado de perfil -->
+  <div class="profile-banner">
+    {% if user.foto_perfil %}
+      <img src="{{ user.foto_perfil.url }}" alt="Foto perfil" class="profile-image">
+    {% else %}
+      <img src="{% static 'images/blog.png' %}" alt="Foto por defecto" class="profile-image">
+    {% endif %}
+    <div class="profile-content text-center">
+      <h4 class="fw-bold">@{{ user.username }}</h4>
+      <p>{{ user.descripcion|default:"Sin descripción aún." }}</p>
+      <a href="{% url 'editar_perfil' %}" class="btn btn-editar px-4 mt-2">Editar perfil</a>
+    </div>
+  </div>
+
+  <!-- Publicaciones -->
+  {% if publicaciones %}
+    <div class="publicaciones-section mt-5">
+      <h4 class="mb-4 fw-bold text-center" style="color:#e91e63;">Mis Publicaciones</h4>
+      <div class="row justify-content-center">
+        {% for pub in publicaciones %}
+          <div class="col-md-6 mb-4">
+            <div class="card-publi h-100">
+              <h5 class="fw-bold" style="color: #e91e63;">{{ pub.titulo }}</h5>
+              <p class="text-muted">{{ pub.resumen }}</p>
+              <div class="d-flex gap-2">
+                <a href="{% url 'ver_publicacion' pub.id_publicacion %}" class="btn btn-sm btn-editar">Leer más</a>
+                <a href="{% url 'editar_publicacion' pub.id_publicacion %}" class="btn btn-sm btn-outline-primary">Editar</a>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  {% else %}
+    <p class="text-center mt-5 text-muted">Aún no has publicado nada.</p>
+  {% endif %}
+</div>
+{% endblock %}

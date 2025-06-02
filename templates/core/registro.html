@@ -1,0 +1,55 @@
+{% extends 'partials/base.html' %}
+{% block title %}Registro{% endblock %}
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/registro.css' %}">
+
+<div class="overlay" id="overlay"></div>
+
+<div class="registro-card position-relative" id="registro-card">
+  <button id="close-button" class="btn-close position-absolute" style="top: 10px; right: 10px;" aria-label="Cerrar"></button>
+
+  <h3 class="text-center mb-3">Crear cuenta</h3>
+
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+
+  <form method="post">
+    {% csrf_token %}
+    
+    <label for="username" class="form-label">Usuario</label>
+    <input type="text" name="username" class="form-control" required>
+
+    <label for="email" class="form-label">Correo electrónico</label>
+    <input type="email" name="email" class="form-control" required>
+
+    <label for="password" class="form-label">Contraseña</label>
+    <input type="password" name="password" class="form-control" required>
+
+    <button type="submit" class="btn btn-primary w-100 mt-3">Registrarse</button>
+  </form>
+
+  <p class="text-center mt-3 text-muted">
+    ¿Ya tienes una cuenta? 
+    <a href="{% url 'index' %}?login=open">Inicia sesión aquí</a>
+  </p>
+</div>
+
+<!-- Cerrar -->
+<script>
+  const overlay = document.getElementById('overlay');
+  const closeBtn = document.getElementById('close-button');
+
+  [overlay, closeBtn].forEach(el => {
+    el.addEventListener('click', () => {
+      window.location.href = '{% url "index" %}';
+    });
+  });
+</script>
+
+{% endblock %}

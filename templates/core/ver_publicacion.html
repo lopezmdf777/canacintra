@@ -1,0 +1,80 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+
+{% block title %}{{ publicacion.titulo }}{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/ver_publicacion.css' %}">
+
+<div class="publicacion-container">
+
+  {% if publicacion.foto_portada %}
+    <div class="portada-container">
+      <img src="{{ publicacion.foto_portada.url }}" alt="Portada" class="portada-img">
+      <div class="titulo-overlay">{{ publicacion.titulo }}</div>
+    </div>
+  {% endif %}
+
+  <div class="autor-box">
+    {% if publicacion.fk_usuario.foto_perfil %}
+      <img src="{{ publicacion.fk_usuario.foto_perfil.url }}" class="foto-autor" alt="Autor">
+    {% endif %}
+    <div>
+      <a href="{% url 'perfil_publico' publicacion.fk_usuario.id %}" class="autor-nombre">
+        @{{ publicacion.fk_usuario.username }}
+      </a>
+      <div class="fecha">Publicado: {{ publicacion.fecha_creacion|date:"d M Y, H:i" }}</div>
+    </div>
+  </div>
+
+  {% if publicacion.fk_categoria %}
+    <div class="categoria">
+      {{ publicacion.fk_categoria.nombre|title }}
+    </div>
+  {% endif %}
+
+  {% if publicacion.resumen %}
+    <p class="resumen"><em>{{ publicacion.resumen }}</em></p>
+  {% endif %}
+
+  <div class="contenido">
+    {{ publicacion.contenido|safe }}
+  </div>
+
+  {% if galeria %}
+    <div class="galeria">
+      {% for img in galeria %}
+        <a href="/media/{{ img.fk_archivo.ruta_archivo }}" data-lightbox="galeria">
+          <img src="/media/{{ img.fk_archivo.ruta_archivo }}" alt="Galería">
+        </a>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <div class="comentarios-section">
+    <h4>Comentarios</h4>
+    {% for comentario in comentarios %}
+      <div class="comentario">
+        <strong>@{{ comentario.fk_usuario.username }}</strong>
+        <span class="fecha-com">{{ comentario.fecha_creacion|date:"d M Y, H:i" }}</span>
+        <p>{{ comentario.contenido }}</p>
+      </div>
+    {% empty %}
+      <p class="text-muted">No hay comentarios aún.</p>
+    {% endfor %}
+
+    {% if user.is_authenticated %}
+      <form method="POST" action="{% url 'comentar' publicacion.id_publicacion %}">
+        {% csrf_token %}
+        <textarea name="contenido" placeholder="Escribe tu comentario..."></textarea>
+        <button type="submit" class="btn-comentar">Publicar</button>
+      </form>
+    {% else %}
+      <p><a href="{% url 'login' %}">Inicia sesión</a> para comentar.</p>
+    {% endif %}
+  </div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+{% endblock %}
